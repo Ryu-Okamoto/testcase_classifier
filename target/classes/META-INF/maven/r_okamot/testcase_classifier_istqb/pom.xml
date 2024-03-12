@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>r_okamot</groupId>
-  <artifactId>testcase_classifier</artifactId>
+  <artifactId>testcase_classifier_istqb</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>testcase_classifier</name>
+  <name>testcase_classifier_istqb</name>
   <url>http://maven.apache.org</url>
 
   <properties>

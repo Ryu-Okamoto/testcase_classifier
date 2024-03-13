@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,23 +13,24 @@ import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
-public class PackageClassesMapBuilder {
+public class TestcaseProfiler {
+    private Path testDir = null;
+    private PackageClassesMap map = null;
     
-    private Path productDir = Paths.get(".");
-    
-    public PackageClassesMapBuilder(String productDir) {
-        this.productDir = Paths.get(productDir);
+    public TestcaseProfiler(String testDir, PackageClassesMap map) {
+        this.testDir = Paths.get(testDir);
+        this.map = map;
     }
     
-    public PackageClassesMap build() throws IOException {
-        PackageClassesMap map = new PackageClassesMap();
-        List<Path> productFiles = getProductFiles();
-        for (Path productFile : productFiles) {
-            String productCode = readAll(productFile);
+    public List<TestcaseProfile> make() throws IOException {
+        List<TestcaseProfile> results = new ArrayList<TestcaseProfile>();
+        List<Path> testFiles = getTestFiles();
+        for (Path testFile : testFiles) {
+            String testCode = readAll(testFile);
             
             CompilationUnit cu = null;
             try {
-                cu = StaticJavaParser.parse(productCode);
+                cu = StaticJavaParser.parse(testCode);
             }
             catch (ParseProblemException e) {
                 System.err.println("compile error occured");
@@ -36,17 +38,16 @@ public class PackageClassesMapBuilder {
                 continue;
             }
             
-            ProductCodeVisitor visitor = new ProductCodeVisitor();
+            TestCodeVisitor visitor = new TestCodeVisitor(map);
             cu.accept(visitor, null);
-            String packageName = visitor.getPackageName();
-            String className = visitor.getClassName();
-            map.add(packageName, className);
+            List<TestcaseProfile> profiles = visitor.getTestcaseProfiles();
+            results.addAll(profiles);
         }
-        return map;
+        return results;
     }
     
-    private List<Path> getProductFiles() throws IOException {
-        return Files.walk(productDir)
+    private List<Path> getTestFiles() throws IOException {
+        return Files.walk(testDir)
                 .map(path->path.toString())
                 .filter(path->path.endsWith(".java"))
                 .map(path->Paths.get(path))
@@ -57,4 +58,4 @@ public class PackageClassesMapBuilder {
         return Files.lines(path, Charset.forName("UTF-8"))
             .collect(Collectors.joining(System.getProperty("line.separator")));
     }
-} 
+}

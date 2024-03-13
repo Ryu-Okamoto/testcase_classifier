@@ -3,12 +3,23 @@ package r_okamot.testcase_classifier;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
+import java.util.List;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
 public class TestCodeVisitorTest {
+    
+    private static void assertTestcaseProfile(
+            String testcaseName,
+            int numOfCalledPackages,
+            int numOfCalledClasses,
+            TestcaseProfile profile
+    ) {
+        assertEquals(testcaseName, profile.getName());
+        assertEquals(numOfCalledPackages, profile.numOfCalledPackages());
+        assertEquals(numOfCalledClasses, profile.numOfCalledClasses());
+    }
     
     @Test
     public void testTestMethods() {
@@ -30,8 +41,10 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals("ATest", v.getTestClassName());
-        assertIterableEquals(Arrays.asList("test00", "test01"), v.getTestMethodNames());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 0, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 0, 0, profiles.get(1));
     }
     
     @Test
@@ -56,8 +69,10 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals(0, v.getNumOfImportedPackages());
-        assertEquals(1, v.getNumOfCalledUserClasses());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 1, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 0, 0, profiles.get(1));
     }
     
     @Test
@@ -86,8 +101,10 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals(0, v.getNumOfImportedPackages());
-        assertEquals(3, v.getNumOfCalledUserClasses());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 3, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 0, 0, profiles.get(1));
     }
     
     @Test
@@ -117,8 +134,10 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals(1, v.getNumOfImportedPackages());
-        assertEquals(2, v.getNumOfCalledUserClasses());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 1, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 1, 1, profiles.get(1));
     }
     
     @Test
@@ -154,8 +173,10 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals(1, v.getNumOfImportedPackages());
-        assertEquals(4, v.getNumOfCalledUserClasses());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 1, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 1, 3, profiles.get(1));
     }
     
     @Test
@@ -189,7 +210,9 @@ public class TestCodeVisitorTest {
         CompilationUnit cu = StaticJavaParser.parse(testCode);
         TestCodeVisitor v = new TestCodeVisitor(map);
         cu.accept(v, null);
-        assertEquals(1, v.getNumOfImportedPackages());
-        assertEquals(4, v.getNumOfCalledUserClasses());
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 1, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 1, 3, profiles.get(1));
     }
 }

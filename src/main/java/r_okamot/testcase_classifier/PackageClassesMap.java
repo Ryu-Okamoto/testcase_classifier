@@ -23,7 +23,9 @@ public class PackageClassesMap {
         return map.keySet();
     }
     public Set<String> get(String packageName) {
-        return map.get(packageName);
+        if (map.containsKey(packageName))
+            return map.get(packageName);
+        return new HashSet<String>();
     }
     
     public void add(String packageName, String className) {
@@ -33,17 +35,10 @@ public class PackageClassesMap {
         Set<String> classNames = map.get(packageName);
         classNames.add(className);
     }
-    
     public void add(String packageName, Set<String> classNames) {
-        if (!map.containsKey(packageName)) {
-            map.put(packageName, classNames);
-        }
-        else {
-            Set<String> oldSet = map.get(packageName);
-            oldSet.addAll(classNames);
-        }
+        classNames.stream().forEach(className->add(packageName, className));
     }
-
+    
     public PackageClassesMap copy() {
         PackageClassesMap newMap = new PackageClassesMap();
         for (String packageName : keySet()) {

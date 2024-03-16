@@ -1,8 +1,8 @@
-r_okamot\testcase_classifier\TestcaseProfiler.class
-r_okamot\testcase_classifier\ProductCodeVisitor.class
-r_okamot\testcase_classifier\TestcaseProfile.class
-r_okamot\testcase_classifier\TestMethodVisitor.class
-r_okamot\testcase_classifier\PackageClassesMapBuilder.class
-r_okamot\testcase_classifier\TestCodeVisitor.class
-r_okamot\testcase_classifier\PackageClassesMap.class
-r_okamot\testcase_classifier\App.class
+r_okamot/testcase_classifier/TestcaseProfile.class
+r_okamot/testcase_classifier/TestMethodVisitor.class
+r_okamot/testcase_classifier/TestcaseProfiler.class
+r_okamot/testcase_classifier/TestCodeVisitor.class
+r_okamot/testcase_classifier/App.class
+r_okamot/testcase_classifier/PackageClassesMap.class
+r_okamot/testcase_classifier/ProductCodeVisitor.class
+r_okamot/testcase_classifier/PackageClassesMapBuilder.class

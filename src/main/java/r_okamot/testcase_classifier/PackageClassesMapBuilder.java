@@ -13,7 +13,6 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 
 public class PackageClassesMapBuilder {
-    
     private Path productDir = Paths.get(".");
     
     public PackageClassesMapBuilder(String productDir) {

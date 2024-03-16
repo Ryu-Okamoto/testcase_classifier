@@ -1,8 +1,8 @@
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\ProductCodeVisitor.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\TestMethodVisitor.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\PackageClassesMapBuilder.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\TestCodeVisitor.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\App.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\TestcaseProfile.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\PackageClassesMap.java
-C:\msys64\home\r-okamot\Eclipse\testcase_classifier\src\main\java\r_okamot\testcase_classifier\TestcaseProfiler.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/PackageClassesMapBuilder.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestCodeVisitor.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestcaseProfile.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/PackageClassesMap.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/ProductCodeVisitor.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/App.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestcaseProfiler.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestMethodVisitor.java

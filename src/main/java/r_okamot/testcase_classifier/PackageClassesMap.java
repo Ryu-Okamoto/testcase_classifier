@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class PackageClassesMap {
-    
     private Map<String, Set<String>> map = new HashMap<String, Set<String>>();
     
     // map-like interface

@@ -8,7 +8,6 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
-    
     private PackageClassesMap map = null;
     private String packageName = "";
     private String className = "";
@@ -17,10 +16,11 @@ public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
     private Set<String> calledPackages = new HashSet<String>();
     private Set<String> calledClasses = new HashSet<String>();
     
-    public TestMethodVisitor(PackageClassesMap map, String packageName, String className, Set<String> importedPackages) {
+    public TestMethodVisitor(PackageClassesMap map, String packageName, String className, String methodName, Set<String> importedPackages) {
         this.map = map;
         this.packageName = packageName;
         this.className = className;
+        this.methodName = methodName;
         this.importedPackages = importedPackages;
     }
     
@@ -31,12 +31,6 @@ public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
                     calledPackages,
                     calledClasses
                 );
-    }
-    
-    @Override
-    public void visit(MethodDeclaration n, Void v) {
-        methodName = n.getNameAsString();
-        super.visit(n, v);
     }
     
     @Override

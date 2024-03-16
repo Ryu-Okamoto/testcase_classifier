@@ -215,4 +215,34 @@ public class TestCodeVisitorTest {
         assertTestcaseProfile("ATest#test00", 0, 1, profiles.get(0));
         assertTestcaseProfile("ATest#test01", 1, 3, profiles.get(1));
     }
+
+    // for issue #1
+    @Test
+    public void testMethodInnerClass() {
+    	PackageClassesMap map = new PackageClassesMap();
+    	map.add("r_okamot.pack", "A");
+    	String testCode = ""
+    	        + "package r_okamot.pack;"
+    	        + ""
+    	        + "public class ATest {"
+    	        + ""
+    	        + "  @Test"
+    	        + "  public void test00() {"
+    	        + ""
+    	        + "    class MethodInnerClass {"
+    	        + "      public void hoge() {}"
+    	        + "    }"
+    	        + "  "
+    	        + "    MethodInnerClass m = new MethodInnerClass();"
+    	        + "  "
+    	        + "  }"
+    	        + "}"
+    	        + "";
+    	CompilationUnit cu = StaticJavaParser.parse(testCode);
+    	TestCodeVisitor v = new TestCodeVisitor(map);
+    	cu.accept(v, null);
+    	List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+    	assertEquals(1, profiles.size());
+    	assertTestcaseProfile("ATest#test00", 0, 0, profiles.get(0));
+    }
 }

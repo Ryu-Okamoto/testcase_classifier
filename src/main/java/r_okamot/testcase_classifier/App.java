@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
+import com.github.javaparser.ParserConfiguration;
+import com.github.javaparser.StaticJavaParser;
+
 public class App {
     
     public static void main(String[] args) {
@@ -20,6 +23,8 @@ public class App {
         String testDir = args[1];
         String outputPath = args[2];
         
+        
+        setJavaVersion();
         try {
             PackageClassesMap map = new PackageClassesMapBuilder(productDir).build();
             List<TestcaseProfile> profiles = new TestcaseProfiler(testDir, map).make();
@@ -33,7 +38,12 @@ public class App {
         
     }
     
-    public static String summaryProfiles(List<TestcaseProfile> profiles) {
+    private static void setJavaVersion() {
+        ParserConfiguration config = new ParserConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_17);
+        StaticJavaParser.setConfiguration(config);
+    }
+    
+    private static String summaryProfiles(List<TestcaseProfile> profiles) {
         return String.join("\n", 
                 profiles.stream()
                         .map(profile->profile.getName() + "," + profile.numOfCalledPackages() + "," + profile.numOfCalledClasses())

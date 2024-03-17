@@ -28,8 +28,14 @@ public class App {
         try {
             PackageClassesMap map = new PackageClassesMapBuilder(productDir).build();
             List<TestcaseProfile> profiles = new TestcaseProfiler(testDir, map).make();
-            String summary = summaryProfiles(profiles);
-            outputSummary(outputPath, summary);
+            String summaryOfAll = summaryProfiles(profiles);
+            String summaryOfISTQB = summaryProfiles(TestcaseClassifier.filterISTQBUnit(profiles));
+            String summaryOfIEEE = summaryProfiles(TestcaseClassifier.filterIEEEUnit(profiles));
+            String summaryOfDEV = summaryProfiles(TestcaseClassifier.filterDEVUnit(profiles));
+            outputSummary(outputPath, "all_profiles.csv", summaryOfAll);
+            outputSummary(outputPath, "istqb_profiles.csv", summaryOfISTQB);
+            outputSummary(outputPath, "ieee_profiles.csv", summaryOfIEEE);
+            outputSummary(outputPath, "dev_profiles.csv", summaryOfDEV);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -46,15 +52,15 @@ public class App {
     private static String summaryProfiles(List<TestcaseProfile> profiles) {
         return String.join("\n", 
                 profiles.stream()
-                        .map(profile->profile.getName() + "," + profile.numOfCalledPackages() + "," + profile.numOfCalledClasses())
+                        .map(profile->profile.getPath() + "," + profile.getName() + "," + profile.numOfCalledPackages() + "," + profile.numOfCalledClasses())
                         .toList()
         );
     }
     
-    private static void outputSummary(String outputDir, String summary) throws IOException {
+    private static void outputSummary(String outputDir, String outputFileName, String summary) throws IOException {
         if (!Files.exists(Paths.get(outputDir)))
             Files.createDirectories(Paths.get(outputDir));
-        Path outputPath = Paths.get(outputDir, "testcase_profiles_summary.txt");
+        Path outputPath = Paths.get(outputDir, outputFileName);
         BufferedWriter writer = Files.newBufferedWriter(outputPath, StandardOpenOption.CREATE);
         writer.write(summary);
         writer.close();

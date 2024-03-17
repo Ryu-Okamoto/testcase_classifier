@@ -21,6 +21,8 @@ public class TestCodeVisitorTest {
         assertEquals(numOfCalledClasses, profile.numOfCalledClasses());
     }
     
+    final static private String TEST_PATH = "src/test";
+    
     @Test
     public void testTestMethods() {
         PackageClassesMap map = new PackageClassesMap();
@@ -39,7 +41,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -67,7 +69,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -99,7 +101,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -132,7 +134,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -171,7 +173,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -208,7 +210,7 @@ public class TestCodeVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestCodeVisitor v = new TestCodeVisitor(map);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
         cu.accept(v, null);
         List<TestcaseProfile> profiles = v.getTestcaseProfiles();
         assertEquals(2, profiles.size());
@@ -239,7 +241,7 @@ public class TestCodeVisitorTest {
     	        + "}"
     	        + "";
     	CompilationUnit cu = StaticJavaParser.parse(testCode);
-    	TestCodeVisitor v = new TestCodeVisitor(map);
+    	TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
     	cu.accept(v, null);
     	List<TestcaseProfile> profiles = v.getTestcaseProfiles();
     	assertEquals(1, profiles.size());

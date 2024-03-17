@@ -4,7 +4,6 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.github.javaparser.StaticJavaParser;
@@ -23,6 +22,8 @@ public class TestMethodVisitorTest {
         assertEquals(numOfCalledClasses, profile.numOfCalledClasses());
     }
     
+    final static private String TEST_PATH = "src/test";
+    
     @Test
     public void testSimpleMethod() {
         PackageClassesMap map = new PackageClassesMap();
@@ -38,7 +39,7 @@ public class TestMethodVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestMethodVisitor v = new TestMethodVisitor(map, "r_okamot.pack", "ATest", "test00", importedPackages);
+        TestMethodVisitor v = new TestMethodVisitor(map, TEST_PATH, "r_okamot.pack", "ATest", "test00", importedPackages);
         cu.accept(v, null);
         TestcaseProfile profile = v.makeProfile();
         assertTestcaseProfile("ATest#test00", 0, 0, profile);
@@ -61,7 +62,7 @@ public class TestMethodVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestMethodVisitor v = new TestMethodVisitor(map, "r_okamot.pack", "ATest", "test00", importedPackages);
+        TestMethodVisitor v = new TestMethodVisitor(map, TEST_PATH, "r_okamot.pack", "ATest", "test00", importedPackages);
         cu.accept(v, null);
         TestcaseProfile profile = v.makeProfile();
         assertTestcaseProfile("ATest#test00", 0, 1, profile);
@@ -86,7 +87,7 @@ public class TestMethodVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestMethodVisitor v = new TestMethodVisitor(map, "r_okamot.pack", "ATest", "test00", importedPackages);
+        TestMethodVisitor v = new TestMethodVisitor(map, TEST_PATH, "r_okamot.pack", "ATest", "test00", importedPackages);
         cu.accept(v, null);
         TestcaseProfile profile = v.makeProfile();
         assertTestcaseProfile("ATest#test00", 0, 2, profile);
@@ -114,7 +115,7 @@ public class TestMethodVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestMethodVisitor v = new TestMethodVisitor(map, "r_okamot.pack", "ATest", "test00", importedPackages);
+        TestMethodVisitor v = new TestMethodVisitor(map, TEST_PATH, "r_okamot.pack", "ATest", "test00", importedPackages);
         cu.accept(v, null);
         TestcaseProfile profile = v.makeProfile();
         assertTestcaseProfile("ATest#test00", 1, 2, profile);
@@ -144,7 +145,7 @@ public class TestMethodVisitorTest {
                 + "}"
                 + "";
         CompilationUnit cu = StaticJavaParser.parse(testCode);
-        TestMethodVisitor v = new TestMethodVisitor(map, "r_okamot.map", "ATest", "test00", importedPackages);
+        TestMethodVisitor v = new TestMethodVisitor(map, TEST_PATH, "r_okamot.map", "ATest", "test00", importedPackages);
         cu.accept(v, null);
         TestcaseProfile profile = v.makeProfile();
         assertTestcaseProfile("ATest#test00", 0, 0, profile);

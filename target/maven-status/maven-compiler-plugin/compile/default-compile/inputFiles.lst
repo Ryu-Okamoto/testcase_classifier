@@ -4,5 +4,6 @@
 /Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/PackageClassesMap.java
 /Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/ProductCodeVisitor.java
 /Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/App.java
+/Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestcaseClassifier.java
 /Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestcaseProfiler.java
 /Users/r-okamot/eclipse-workspace/testcase_classifier/src/main/java/r_okamot/testcase_classifier/TestMethodVisitor.java

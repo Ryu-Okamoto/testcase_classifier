@@ -38,7 +38,7 @@ public class TestcaseProfiler {
                 continue;
             }
             
-            TestCodeVisitor visitor = new TestCodeVisitor(map);
+            TestCodeVisitor visitor = new TestCodeVisitor(map, testFile.toString());
             cu.accept(visitor, null);
             List<TestcaseProfile> profiles = visitor.getTestcaseProfiles();
             results.addAll(profiles);

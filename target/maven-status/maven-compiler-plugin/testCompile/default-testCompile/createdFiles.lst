@@ -1,4 +1,5 @@
 r_okamot/testcase_classifier/TestMethodVisitorTest.class
 r_okamot/testcase_classifier/ProductCodeVisitorTest.class
+r_okamot/testcase_classifier/TestcaseClassifierTest.class
 r_okamot/testcase_classifier/PackageClassesMapTest.class
 r_okamot/testcase_classifier/TestCodeVisitorTest.class

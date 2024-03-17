@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 
 public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
     private PackageClassesMap map = null;
+    private String path = "";
     private String packageName = "";
     private String className = "";
     private String methodName = "";
@@ -16,8 +16,9 @@ public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
     private Set<String> calledPackages = new HashSet<String>();
     private Set<String> calledClasses = new HashSet<String>();
     
-    public TestMethodVisitor(PackageClassesMap map, String packageName, String className, String methodName, Set<String> importedPackages) {
+    public TestMethodVisitor(PackageClassesMap map, String path, String packageName, String className, String methodName, Set<String> importedPackages) {
         this.map = map;
+        this.path = path;
         this.packageName = packageName;
         this.className = className;
         this.methodName = methodName;
@@ -26,6 +27,7 @@ public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
     
     public TestcaseProfile makeProfile() {
         return new TestcaseProfile(
+                    path,
                     packageName,
                     className + "#" + methodName,
                     calledPackages,

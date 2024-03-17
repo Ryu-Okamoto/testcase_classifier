@@ -29,7 +29,8 @@ public class TestMethodVisitor extends VoidVisitorAdapter<Void> {
         return new TestcaseProfile(
                     path,
                     packageName,
-                    className + "#" + methodName,
+                    className,
+                    methodName,
                     calledPackages,
                     calledClasses
                 );

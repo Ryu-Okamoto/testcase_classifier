@@ -40,7 +40,7 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertTrue(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertTrue(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertTrue(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertTrue(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }
     
     @Test
@@ -61,7 +61,7 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertTrue(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertTrue(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertTrue(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertTrue(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }
     
     @Test
@@ -84,7 +84,7 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertFalse(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertTrue(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertTrue(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertTrue(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }
     
     @Test
@@ -107,7 +107,7 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertFalse(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertTrue(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertFalse(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertFalse(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }
     
     @Test
@@ -132,7 +132,29 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertFalse(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertFalse(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertTrue(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertTrue(TestcaseClassifier.judgeUnitOnDEV(map, profile));
+    }
+    
+    @Test
+    public void testIntegration_DEV() {
+        PackageClassesMap map = new PackageClassesMap();
+        map.add("r_okamot.pack", "A");
+        map.add("r_okamot.pack.sub", "B");
+        String testPath = "src/test/HogeTest.java";
+        String testCode = ""
+                + "package r_okamot.pack;"
+                + ""
+                + "public class HogeTest {"
+                + "  @Test"
+                + "  public void test00() {"
+                + "    A a = new A();"
+                + "  }"
+                + "}"
+                + "";
+        TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
+        assertTrue(TestcaseClassifier.judgeUnitOnISTQB(profile));
+        assertTrue(TestcaseClassifier.judgeUnitOnIEEE(profile));
+        assertFalse(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }
     
     @Test
@@ -157,6 +179,6 @@ public class TestcaseClassifierTest {
         TestcaseProfile profile = makeUniqueProfile(map, testPath, testCode);
         assertFalse(TestcaseClassifier.judgeUnitOnISTQB(profile));
         assertFalse(TestcaseClassifier.judgeUnitOnIEEE(profile));
-        assertFalse(TestcaseClassifier.judgeUnitOnDEV(profile));
+        assertFalse(TestcaseClassifier.judgeUnitOnDEV(map, profile));
     }    
 }

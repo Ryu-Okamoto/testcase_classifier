@@ -52,7 +52,7 @@ public class TestCodeVisitor extends VoidVisitorAdapter<Void> {
     
     @Override
     public void visit(MethodDeclaration n, Void v) {
-        if (n.isAnnotationPresent("Test") && n.isPublic()) {
+        if (n.isAnnotationPresent("Test") || n.isAnnotationPresent("ParameterizedTest") || n.isAnnotationPresent("RepeatedTest")) {
             TestMethodVisitor visitor = new TestMethodVisitor(map, path, packageName, foldClassNameNest(), n.getNameAsString(), importedPackages);
             visitor.visit(n, v);
             TestcaseProfile profile = visitor.makeProfile();

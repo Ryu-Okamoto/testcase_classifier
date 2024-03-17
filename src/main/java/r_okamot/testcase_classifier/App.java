@@ -23,7 +23,6 @@ public class App {
         String testDir = args[1];
         String outputPath = args[2];
         
-        
         setJavaVersion();
         try {
             PackageClassesMap map = new PackageClassesMapBuilder(productDir).build();
@@ -31,7 +30,7 @@ public class App {
             String summaryOfAll = summaryProfiles(profiles);
             String summaryOfISTQB = summaryProfiles(TestcaseClassifier.filterISTQBUnit(profiles));
             String summaryOfIEEE = summaryProfiles(TestcaseClassifier.filterIEEEUnit(profiles));
-            String summaryOfDEV = summaryProfiles(TestcaseClassifier.filterDEVUnit(profiles));
+            String summaryOfDEV = summaryProfiles(TestcaseClassifier.filterDEVUnit(map, profiles));
             outputSummary(outputPath, "all_profiles.csv", summaryOfAll);
             outputSummary(outputPath, "istqb_profiles.csv", summaryOfISTQB);
             outputSummary(outputPath, "ieee_profiles.csv", summaryOfIEEE);

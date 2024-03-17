@@ -12,6 +12,7 @@ src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseC
 src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseClassifierTest#testUnit_IEEE_DEV,0,2
 src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseClassifierTest#testUnit_IEEE,0,2
 src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseClassifierTest#testUnit_DEV,0,2
+src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseClassifierTest#testIntegration_DEV,0,2
 src/test/java/r_okamot/testcase_classifier/TestcaseClassifierTest.java,TestcaseClassifierTest#testTrivialIntegration,0,2
 src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testTestMethods,0,2
 src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testOnlyOnePackage,0,2
@@ -20,6 +21,8 @@ src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisi
 src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testImportOtherPackageWithSomeClasses,0,2
 src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testImportOtherPackageWithWildcard,0,2
 src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testMethodInnerClass,0,2
+src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testNonPublicMethods,0,2
+src/test/java/r_okamot/testcase_classifier/TestCodeVisitorTest.java,TestCodeVisitorTest#testOtherAnnotatedMethods,0,2
 src/test/java/r_okamot/testcase_classifier/PackageClassesMapTest.java,PackageClassesMapTest#testAdd,0,1
 src/test/java/r_okamot/testcase_classifier/PackageClassesMapTest.java,PackageClassesMapTest#testAddAsSet,0,1
 src/test/java/r_okamot/testcase_classifier/PackageClassesMapTest.java,PackageClassesMapTest#testFindFalse,0,1

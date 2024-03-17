@@ -247,4 +247,56 @@ public class TestCodeVisitorTest {
     	assertEquals(1, profiles.size());
     	assertTestcaseProfile("ATest#test00", 0, 0, profiles.get(0));
     }
+    
+    @Test
+    public void testNonPublicMethods() {
+        PackageClassesMap map = new PackageClassesMap();
+        map.add("r_okamot.pack", "A");
+        String testCode = ""
+                + "package r_okamot.pack;"
+                + ""
+                + "public class ATest {"
+                + ""
+                + "  @Test"
+                + "  void test00() {}"
+                + "  "
+                + "  @Test void test01() {}"
+                + ""
+                + "}"
+                + "";
+        CompilationUnit cu = StaticJavaParser.parse(testCode);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
+        cu.accept(v, null);
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 0, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 0, 0, profiles.get(1));
+    }
+    
+    @Test
+    public void testOtherAnnotatedMethods() {
+        PackageClassesMap map = new PackageClassesMap();
+        map.add("r_okamot.pack", "A");
+        String testCode = ""
+                + "package r_okamot.pack;"
+                + ""
+                + "public class ATest {"
+                + ""
+                + "  @RepeatedTest(5)"
+                + "  void test00() {}"
+                + "  "
+                + "  @ParameterizedTest\n"
+                + "  @ValueSource(strings = { \"racecar\", \"radar\", \"able was I ere I saw elba\" })"
+                + "  void test01(String candidate) {}"
+                + ""
+                + "}"
+                + "";
+        CompilationUnit cu = StaticJavaParser.parse(testCode);
+        TestCodeVisitor v = new TestCodeVisitor(map, TEST_PATH);
+        cu.accept(v, null);
+        List<TestcaseProfile> profiles = v.getTestcaseProfiles();
+        assertEquals(2, profiles.size());
+        assertTestcaseProfile("ATest#test00", 0, 0, profiles.get(0));
+        assertTestcaseProfile("ATest#test01", 0, 0, profiles.get(1));
+    }
 }

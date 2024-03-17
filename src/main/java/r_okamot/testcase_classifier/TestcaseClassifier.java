@@ -24,12 +24,8 @@ public class TestcaseClassifier {
         return profiles.stream().filter((profile)->judgeUnitOnIEEE(profile)).toList();
     }
     
-    public static List<TestcaseProfile> filterDEVUnit(List<TestcaseProfile> profiles) {
-        return profiles.stream().filter((profile)->judgeUnitOnDEV(profile)).toList();
-    }
-    
-    public static List<TestcaseProfile> filterDEVUnit(List<TestcaseProfile> profiles, Set<String> integKeys) {
-        return profiles.stream().filter((profile)->judgeUnitOnDEV(profile, integKeys)).toList();
+    public static List<TestcaseProfile> filterDEVUnit(PackageClassesMap map, List<TestcaseProfile> profiles) {
+        return profiles.stream().filter((profile)->judgeUnitOnDEV(map, profile)).toList();
     }
     
     public static boolean judgeUnitOnISTQB(TestcaseProfile profile) {
@@ -40,21 +36,25 @@ public class TestcaseClassifier {
         return profile.numOfCalledPackages() == 0;
     }
     
-    public static boolean judgeUnitOnDEV(TestcaseProfile profile) {
-        String[] testDirs = profile.getPath().split(System.getProperty("file.separator"));
-        for (String testDir : testDirs) {
-            if (defaultIntegKeys.contains(testDir))
-                return false;
-        }
-        return true;
+    public static boolean judgeUnitOnDEV(PackageClassesMap map, TestcaseProfile profile) {
+        return
+                !doseTestPathContainsAnyIntegKey(defaultIntegKeys, profile)
+            &&   isThereSameNameProductClass(map, profile)
+            ;
     }
     
-    public static boolean judgeUnitOnDEV(TestcaseProfile profile, Set<String> integKeys) {
+    private static boolean doseTestPathContainsAnyIntegKey(Set<String> integKeys, TestcaseProfile profile) {
         String[] testDirs = profile.getPath().split(System.getProperty("file.separator"));
         for (String testDir : testDirs) {
             if (integKeys.contains(testDir))
-                return false;
+                return true;
         }
-        return true;
+        return false;
+    }
+    
+    private static boolean isThereSameNameProductClass(PackageClassesMap map, TestcaseProfile profile) {
+        Set<String> classesUnderSamePackage = map.get(profile.getPackageName());
+        String inferedCorrespondingClassName = profile.getClassName().replaceAll("(\\w*)Test", "$1");
+        return classesUnderSamePackage.contains(inferedCorrespondingClassName);
     }
 }

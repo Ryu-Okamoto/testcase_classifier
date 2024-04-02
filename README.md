@@ -3,12 +3,16 @@
 後述する 3 つの定義に基づいて分類する．
 
 # 使い方
+## ビルド
 [Maven](https://maven.apache.org/) が必要．（Maven 3.9.6 かつ Java 21 で動作を確認済み）
-
 ~~~
 % mvn clean package
 % cp target/testcase_classifier.jar ${target project dir}
 % cd ${target project dir}
+~~~
+
+## 使用
+~~~
 % java -jar testcase_classifier.jar [options]
 ~~~
 
@@ -21,7 +25,7 @@
 |```-t, --test <arg>```|対象プロジェクトのテストディレクトリを指定（デフォルトは ```./src/test```）|
 |```--version=<8\|11\|17\|latest>```|対象プロジェクトの Java バージョン（デフォルトは ```latest```）|
 
-## 出力
+### 出力
 ```${output dir}/`***_profiles.csv``` が出力される．  
 各ファイルにおける形式および例は以下の通り．  
 

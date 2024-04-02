@@ -20,12 +20,22 @@ public class App {
         String productDir = "./src/main";
         String testDir = "./src/test";
         String outputPath = ".";
+        String specifiedVersion = "latest";
    
         Options options = new Options();
         options.addOption("h", "help", false, "print this message.");
-        options.addOption("p", "product", true, "product dir path. (default \"./src/main\")");
-        options.addOption("t", "test", true, "test dir path. (default \"./src/test\")");
-        options.addOption("o", "output", true, "output path. (default \".\")");
+        options.addOption("p", "product", true, "product dir path.");
+        options.addOption("t", "test", true, "test dir path.");
+        options.addOption("o", "output", true, "output path.");
+        options.addOption(
+                    Option.builder()
+                        .longOpt("java-version")
+                        .argName("8|11|17|latest")
+                        .desc("java version of target project. ")
+                        .hasArg()
+                        
+                        .build()
+                );
         try {
             CommandLine cmd = new DefaultParser().parse(options, args);
             
@@ -38,13 +48,25 @@ public class App {
             if (cmd.hasOption("p")) productDir = cmd.getOptionValue("p");
             if (cmd.hasOption("t")) testDir = cmd.getOptionValue("t");
             if (cmd.hasOption("o")) outputPath = cmd.getOptionValue("o");
+            
+            if (cmd.hasOption("java-version")) {
+                specifiedVersion = cmd.getOptionValue("java-version");
+                if (!specifiedVersion.equals("8") &&
+                        !specifiedVersion.equals("11") &&
+                        !specifiedVersion.equals("17") &&
+                        !specifiedVersion.equals("latest")
+                   ) {
+                    System.out.println(specifiedVersion + "invalid java version.");
+                    return;
+                }
+            }
         }
         catch (ParseException e) {
             e.printStackTrace();
             return;
         }
         
-        setJavaVersion();
+        setJavaVersion(specifiedVersion);
         try {
             PackageClassesMap map = new PackageClassesMapBuilder(productDir).build();
             List<TestcaseProfile> profiles = new TestcaseProfiler(testDir, map).make();
@@ -64,8 +86,14 @@ public class App {
         
     }
     
-    private static void setJavaVersion() {
-        ParserConfiguration config = new ParserConfiguration().setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_17);
+    private static void setJavaVersion(String version) {
+        ParserConfiguration config = new ParserConfiguration();
+        switch (version) {
+        case  "8": config.setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_8);  break;
+        case "11": config.setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_11); break;
+        case "17": config.setLanguageLevel(ParserConfiguration.LanguageLevel.JAVA_17); break;
+        default:   config.setLanguageLevel(ParserConfiguration.LanguageLevel.CURRENT); break;
+        }
         StaticJavaParser.setConfiguration(config);
     }
     

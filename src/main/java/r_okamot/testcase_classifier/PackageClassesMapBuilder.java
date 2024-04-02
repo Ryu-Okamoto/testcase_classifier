@@ -30,7 +30,7 @@ public class PackageClassesMapBuilder {
                 cu = StaticJavaParser.parse(productCode);
             }
             catch (ParseProblemException e) {
-                System.err.println("compile error occured");
+                System.err.println("compile error occured at " + productFile.toString() + ".");
                 System.err.println(e.getMessage());
                 continue;
             }

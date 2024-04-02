@@ -33,7 +33,7 @@ public class TestcaseProfiler {
                 cu = StaticJavaParser.parse(testCode);
             }
             catch (ParseProblemException e) {
-                System.err.println("compile error occured");
+                System.err.println("compile error occured at " + testFile.toString() + ".");
                 System.err.println(e.getMessage());
                 continue;
             }

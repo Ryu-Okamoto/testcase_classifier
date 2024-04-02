@@ -17,15 +17,15 @@ public class App {
     
     public static void main(String[] args) {
         
-        String productDir = "src/main";
-        String testDir = "src/test";
+        String productDir = "./src/main";
+        String testDir = "./src/test";
         String outputPath = ".";
    
         Options options = new Options();
         options.addOption("h", "help", false, "print this message.");
-        options.addOption("p", "product", true, "product dir path. (default src/main)");
-        options.addOption("t", "test", true, "test dir path. (default src/test)");
-        options.addOption("o", "output", true, "output path. (default .)");
+        options.addOption("p", "product", true, "product dir path. (default \"./src/main\")");
+        options.addOption("t", "test", true, "test dir path. (default \"./src/test\")");
+        options.addOption("o", "output", true, "output path. (default \".\")");
         try {
             CommandLine cmd = new DefaultParser().parse(options, args);
             

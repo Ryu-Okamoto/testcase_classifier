@@ -3,23 +3,31 @@
 後述する 3 つの定義に基づいて分類する．
 
 # 使い方
-[Maven](https://maven.apache.org/) が必要．
+[Maven](https://maven.apache.org/) が必要．（Maven 3.9.6 かつ Java 21 で動作を確認済み）
 
 ~~~
 % mvn clean package
 % cp target/testcase_classifier.jar ${target project dir}
 % cd ${target project dir}
-% java -jar testcase_classifier.jar ${product dir} ${test dir} ${output dir}
+% java -jar testcase_classifier.jar [options]
 ~~~
+
+オプションには次が指定できる．
+|オプション名|役割|
+|:---|:---|
+|```-h, --help```|使い方を表示|
+|```-o, --output <arg>```|結果の出力先パスを指定（デフォルトはカレントディレクトリ）|
+|```-p, --product <arg>```|対象プロジェクトのプロダクトディレクトリを指定（デフォルトは ```./src/main```）|
+|```-t, --test <arg>```|対象プロジェクトのテストディレクトリを指定（デフォルトは ```./src/test```）|
 
 ## 出力
 ```${output dir}/`***_profiles.csv``` が出力される．  
 各ファイルにおける形式および例は以下の通り．  
 
-| テストケースのパス | テストケース名 |  呼び出しパッケージ数 | 呼び出しクラス数 
+| テストケースのパス | テストケース名 |  呼び出しパッケージ数 | 呼び出しクラス数 |
 | :----: | :----: | :----: | :---: |
-| ```src/test/Example.java``` | ```Example#testA``` | 1 | 2 
-| ```src/test/Example2.java``` | ```Example2#testB``` | 0 | 0 
+| ```src/test/Example.java``` | ```Example#testA``` | 1 | 2 |
+| ```src/test/Example2.java``` | ```Example2#testB``` | 0 | 0 | 
 
 
 # 単体・結合の定義

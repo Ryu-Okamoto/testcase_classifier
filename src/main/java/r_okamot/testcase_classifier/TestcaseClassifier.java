@@ -1,5 +1,7 @@
 package r_okamot.testcase_classifier;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -44,9 +46,9 @@ public class TestcaseClassifier {
     }
     
     private static boolean doseTestPathContainsAnyIntegKey(Set<String> integKeys, TestcaseProfile profile) {
-        String[] testDirs = profile.getPath().split(System.getProperty("file.separator"));
-        for (String testDir : testDirs) {
-            if (integKeys.contains(testDir))
+        Path path = Paths.get(profile.getPath());
+        for (Path testDir : path) {
+            if (integKeys.contains(testDir.toString()))
                 return true;
         }
         return false;

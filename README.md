@@ -32,8 +32,8 @@
 
 # 単体・結合の定義
 Trautsch らの解釈および定義を参考にした．
-- [Are There Any Unit Tests? An Empirical Study on Unit Testing in Open Source Python Projects](https://ieeexplore.ieee.org/document/7927976)
-- [Are unit and integration test definitions still valid for modern Java projects? An empirical study on open-source projects](https://www.sciencedirect.com/science/article/pii/S0164121219301955)
+- [F. Trautsch and J. Grabowski, "Are There Any Unit Tests? An Empirical Study on Unit Testing in Open Source Python Projects," 2017 IEEE International Conference on Software Testing, Verification and Validation, 2017, pp. 207-218](https://ieeexplore.ieee.org/document/7927976)
+- [F. Trautsch, S. Herbold and J. Grabowski, Are Unit and Integration Test Definitions Still Valid for Modern Java Projects? An Empirical Study on Open-Source Projects, Journal of Systems and Software, Volume 159, 2020, 110421](https://www.sciencedirect.com/science/article/pii/S0164121219301955)
 
 以下の 3 つである
 1. ISTQB の定義
